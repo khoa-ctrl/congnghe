@@ -82,12 +82,12 @@
     }
   }
 
-  // Đảm bảo mở khóa giao diện sau tối đa 1.5 giây dù ảnh có chậm
+  // Dự phòng mở khóa giao diện sau 1.2 giây để tuyệt đối không bao giờ treo màn hình đen
   setTimeout(() => {
     if (!body.classList.contains('revealed')) {
       triggerReady();
     }
-  }, 1500);
+  }, 1200);
 
   function triggerReady() {
     if (splash) {
