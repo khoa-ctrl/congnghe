@@ -160,15 +160,21 @@
 
   let introDone = false;
   function setupIntro() {
+    if (!film) { startReveal(); return; }
     film.muted = true; film.defaultMuted = true; film.playsInline = true; film.webkitPlaysInline = true;
+    
+    // Xử lý nếu video lỗi tải hoặc bị chặn CORS
+    film.onerror = () => { if (!introDone) { introDone = true; startReveal(); } };
+
     let p = film.play();
-    if (p !== undefined) { p.catch(() => { intro.classList.add('novideo'); setTimeout(startReveal, 1300); }); }
+    if (p !== undefined) { 
+      p.catch(() => { 
+        if (!introDone) { introDone = true; startReveal(); } 
+      }); 
+    }
+    
     film.playbackRate = 2;
     film.addEventListener('play', () => { film.playbackRate = 2; });
-
-    let checkInterval = setInterval(() => {
-      if (film.currentTime > 0.05) { film.currentTime = 0; clearInterval(checkInterval); }
-    }, 50);
 
     film.addEventListener('timeupdate', () => {
       if (!film.duration) return;
@@ -178,20 +184,19 @@
     });
 
     film.addEventListener('ended', () => { if (!introDone) { introDone = true; startReveal(); } });
-    setTimeout(() => { if (!introDone) { introDone = true; startReveal(); } }, 14000);
+    
+    // Tự động bỏ qua sau 3 giây nếu video không phản hồi để tránh treo giao diện
+    setTimeout(() => { if (!introDone) { introDone = true; startReveal(); } }, 3000);
     skipBtn.addEventListener('click', () => { if (!introDone) { introDone = true; startReveal(); } });
-    ['pointerdown', 'keydown', 'touchstart'].forEach(ev => window.addEventListener(ev, () => { if (film.paused && !introDone) film.play().catch(() => {}); }, { once: true }));
   }
 
   let splashMin = false;
-  setTimeout(() => { splashMin = true; checkSplashReady(); }, 1150);
-  let splashBack = setTimeout(() => { if (!body.classList.contains('revealed')) startReveal(); }, 9000);
+  setTimeout(() => { splashMin = true; checkSplashReady(); }, 800);
 
   function checkSplashReady() {
     if (assetsLoaded >= totalAssets && splashMin && !body.classList.contains('revealed')) {
-      clearTimeout(splashBack);
       splash.classList.add('out');
-      setTimeout(() => splash.remove(), 950);
+      setTimeout(() => splash.remove(), 500);
       setupIntro();
     }
   }
@@ -207,9 +212,9 @@
         setTimeout(() => {
           body.classList.add('revealed');
           intro.classList.add('gone');
-          setTimeout(() => intro.remove(), 700);
+          setTimeout(() => intro.remove(), 500);
           preloadImages();
-        }, 1000);
+        }, 500);
       });
     });
   }
