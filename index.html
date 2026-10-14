@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Nghề Nhà Khoa Học Máy Tính — Hướng Nghiệp & Khám Phá Thế Giới Số</title>
+  <meta name="description" content="Trang web định hướng nghề nghiệp nhà khoa học máy tính bao gồm 6 phần: Nội dung chính, Tìm hiểu chung, Yêu cầu cần có, Liên kết thực tế, Hướng đi phù hợp và Tổng kết.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="locked">
+
+  <div id="splash">
+    <div class="mark">Nghề<em>KhoaHọc</em></div>
+    <div class="bar"><s id="bar"></s></div>
+    <div class="tag">Hướng Nghiệp Số 2026</div>
+  </div>
+
+  <div id="intro">
+    <video id="film" muted autoplay playsinline webkit-playsinline preload="auto" disablepictureinpicture src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260922_195107_ed3f055a-3a13-4a71-b743-e10310454246.mp4"></video>
+    <div class="veil"></div>
+    <div class="fallback"></div>
+    <button class="skip" id="skip">Bỏ qua</button>
+  </div>
+
+  <header class="chrome">
+    <a class="wordmark" href="#" aria-label="Nghề Khoa Học Máy Tính">Khoa<em>Học</em></a>
+    <button id="menuBtn" class="menu-btn" aria-expanded="false" aria-controls="menu" aria-label="Mở menu">
+      <span class="menu-label">Menu</span>
+      <span class="bars"><i></i><i></i></span>
+    </button>
+  </header>
+
+  <aside class="bio chrome">
+    <div class="who">
+      <img id="avatar" src="" alt="Chân dung nhà khoa học" crossorigin="anonymous">
+      <b>Tư Duy Định Hướng</b>
+    </div>
+    <p>Giải quyết vấn đề hướng nghiệp cho học sinh: Định hướng chọn đúng ngành nghề công nghệ trong tương lai dựa trên sở thích, năng lực và dữ liệu kiểm chứng thực tế[cite: 3].</p>
+  </aside>
+
+  <footer class="colophon chrome">
+    Hướng Nghiệp Số 2026
+  </footer>
+
+  <button id="gridBtn" class="gridbtn" aria-label="Chuyển đổi dạng lưới">
+    <b></b><b></b><b></b><b></b>
+  </button>
+
+  <div class="cue chrome">
+    <span>Kéo để xoay khối nghề</span>
+    <s></s>
+  </div>
+
+  <div id="scrolltrack"></div>
+  <div id="stage">
+    <div id="world">
+      <div id="orb"></div>
+      <h1 id="headline">
+        <span class="inner">
+          <span style="--i:0">Khám</span>
+          <span style="--i:1">Phá</span>
+          <span style="--i:2">Nghề</span>
+          <span style="--i:3">Máy</span>
+          <span style="--i:4">Tính</span>
+        </span>
+      </h1>
+    </div>
+  </div>
+
+  <div class="vig"></div>
+
+  <div id="grid" tabindex="-1">
+    <div class="rows" id="gridRows"></div>
+  </div>
+
+  <div id="lit" role="dialog" aria-hidden="true">
+    <div class="scrim" data-close></div>
+    <div class="plate">
+      <div class="shot">
+        <img id="litImg" src="" alt="" crossorigin="anonymous">
+        <button data-close class="close-btn">Đóng</button>
+      </div>
+      <div class="meta">
+        <div>
+          <h2 id="litTitle"></h2>
+          <div class="where" id="litWhere"></div>
+        </div>
+        <div class="note" id="litNote"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="menu">
+    <nav>
+      <a href="#" data-grid>1. Nội Dung Chính (Khám Phá Sơ Đồ 3D)</a>
+      <a href="#" data-close-menu>2. Tìm Hiểu Chung Về Nghề Khoa Học Máy Tính</a>
+      <a href="#" data-close-menu>3. Yêu Cầu Cần Có (Kiến Thức & Kỹ Năng)</a>
+      <a href="#" data-close-menu>4. Liên Kết Thực Tế & Kiểm Chứng</a>
+      <a href="#" data-close-menu>5. Hướng Đi Phù Hợp & Đối Chiếu Năng Lực</a>
+      <a href="#" data-close-menu>6. Tổng Kết & Gửi Phản Hồi Thử Nghiệm</a>
+    </nav>
+    <div class="addr">
+      Silicon Valley · Cambridge · Tokyo · Sài Gòn<br>
+      contact@computerscience.archive | Static Web Verified
+    </div>
+  </div>
+
+  <div id="dot"></div>
+
+  <script src="data.js"></script>
+  <script src="background.js"></script>
+  <script src="defender.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
