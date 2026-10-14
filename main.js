@@ -22,9 +22,6 @@
   const headline = document.getElementById('headline');
   const splash = document.getElementById('splash');
   const bar = document.getElementById('bar');
-  const intro = document.getElementById('intro');
-  const film = document.getElementById('film');
-  const skipBtn = document.getElementById('skip');
   const avatar = document.getElementById('avatar');
   const gridRows = document.getElementById('gridRows');
   const gridBtn = document.getElementById('gridBtn');
@@ -37,7 +34,6 @@
   const dot = document.getElementById('dot');
 
   function initData() {
-    avatar.src = ARCHIVE_ASSETS.avatar;
     avatar.onload = checkAssetLoaded;
     avatar.onerror = checkAssetLoaded;
 
@@ -58,12 +54,13 @@
       });
     }
     buildScene();
+    preloadImages();
   }
 
   function checkAssetLoaded() {
     assetsLoaded++;
     let progress = Math.min(1, assetsLoaded / totalAssets);
-    bar.style.transform = `scaleX(${progress})`;
+    if (bar) bar.style.transform = `scaleX(${progress})`;
     if (assetsLoaded >= totalAssets) triggerReady();
   }
 
@@ -77,10 +74,27 @@
   }
 
   function finishItemLoad(item) {
-    item.loaded = true;
-    if (item.imgEl) { item.imgEl.src = item.url; item.imgEl.onload = () => item.imgEl.classList.add('in'); }
-    if (item.gridImgEl) { item.gridImgEl.src = item.url; }
-    checkAssetLoaded();
+    if (!item.loaded) {
+      item.loaded = true;
+      if (item.imgEl) { item.imgEl.src = item.url; item.imgEl.onload = () => item.imgEl.classList.add('in'); }
+      if (item.gridImgEl) { item.gridImgEl.src = item.url; }
+      checkAssetLoaded();
+    }
+  }
+
+  // Đảm bảo mở khóa giao diện sau tối đa 1.5 giây dù ảnh có chậm
+  setTimeout(() => {
+    if (!body.classList.contains('revealed')) {
+      triggerReady();
+    }
+  }, 1500);
+
+  function triggerReady() {
+    if (splash) {
+      splash.classList.add('out');
+      setTimeout(() => splash.remove(), 400);
+    }
+    startReveal();
   }
 
   function buildScene() {
@@ -142,6 +156,7 @@
       sphereCoords.push({ x, y, z, lat, lon });
 
       let card = item.cardEl;
+      if (!card) return;
       let ch = item.tall ? cw * 1.25 : cw / 1.5;
       let mt = item.tall ? cw * -0.625 : -cw / 3;
       let ml = -cw / 2;
@@ -158,63 +173,13 @@
     window._R = R; window._persp = persp;
   }
 
-  let introDone = false;
-  function setupIntro() {
-    if (!film) { startReveal(); return; }
-    film.muted = true; film.defaultMuted = true; film.playsInline = true; film.webkitPlaysInline = true;
-    
-    // Xử lý nếu video lỗi tải hoặc bị chặn CORS
-    film.onerror = () => { if (!introDone) { introDone = true; startReveal(); } };
-
-    let p = film.play();
-    if (p !== undefined) { 
-      p.catch(() => { 
-        if (!introDone) { introDone = true; startReveal(); } 
-      }); 
-    }
-    
-    film.playbackRate = 2;
-    film.addEventListener('play', () => { film.playbackRate = 2; });
-
-    film.addEventListener('timeupdate', () => {
-      if (!film.duration) return;
-      if (film.duration - film.currentTime <= 0.45 || film.ended) {
-        if (!introDone) { introDone = true; startReveal(); }
-      }
-    });
-
-    film.addEventListener('ended', () => { if (!introDone) { introDone = true; startReveal(); } });
-    
-    // Tự động bỏ qua sau 3 giây nếu video không phản hồi để tránh treo giao diện
-    setTimeout(() => { if (!introDone) { introDone = true; startReveal(); } }, 3000);
-    skipBtn.addEventListener('click', () => { if (!introDone) { introDone = true; startReveal(); } });
-  }
-
-  let splashMin = false;
-  setTimeout(() => { splashMin = true; checkSplashReady(); }, 800);
-
-  function checkSplashReady() {
-    if (assetsLoaded >= totalAssets && splashMin && !body.classList.contains('revealed')) {
-      splash.classList.add('out');
-      setTimeout(() => splash.remove(), 500);
-      setupIntro();
-    }
-  }
-  function triggerReady() { checkSplashReady(); }
-
   function startReveal() {
-    intro.classList.add('closing');
     body.classList.remove('locked');
     document.documentElement.style.overflow = '';
     window.__SAFE_EXECUTE__(() => {
       computeLayout();
       requestAnimationFrame(() => {
-        setTimeout(() => {
-          body.classList.add('revealed');
-          intro.classList.add('gone');
-          setTimeout(() => intro.remove(), 500);
-          preloadImages();
-        }, 500);
+        body.classList.add('revealed');
       });
     });
   }
@@ -255,6 +220,7 @@
 
       for (let i = 0; i < N; i++) {
         let sc = sphereCoords[i];
+        if (!sc) continue;
         let x0 = sc.x * R, y0 = -sc.y * R, z0 = sc.z * R;
         let x1 = x0 * cosY + z0 * sinY, y1 = y0, z1 = -x0 * sinY + z0 * cosY;
         let zf = (y1 * sinX + z1 * cosX) / R;
@@ -264,8 +230,10 @@
         if (focusedIdx === i) dim = 1;
 
         let card = itemsData[i].cardEl;
-        let dimStr = dim.toFixed(3);
-        if (card._lastDim !== dimStr) { card.style.setProperty('--d', dimStr); card._lastDim = dimStr; }
+        if (card) {
+          let dimStr = dim.toFixed(3);
+          if (card._lastDim !== dimStr) { card.style.setProperty('--d', dimStr); card._lastDim = dimStr; }
+        }
       }
       lastSy = sy; lastSx = sx; lastCamZ = camZ;
     }
