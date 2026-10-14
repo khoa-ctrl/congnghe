@@ -6,7 +6,7 @@
 
   let itemsData = [];
   let assetsLoaded = 0;
-  let totalAssets = N + 1; // 21 stills + film
+  let totalAssets = N + 1; // 21 stills + avatar
 
   let spin = 0, tilt = -4, camZ = 0;
   let dragX = 0, dragY = 0, velX = 0, velY = 0;
@@ -50,8 +50,7 @@
         place: item.place,
         note: item.note,
         tall: !!item.tall,
-        rawUrl: url,
-        blobUrl: url,
+        url: url,
         imgEl: null,
         cardEl: null,
         gridImgEl: null,
@@ -69,33 +68,18 @@
   }
 
   function preloadImages() {
-    let max = window.innerWidth <= 380 ? 420 : window.innerWidth <= 640 ? 520 : window.innerWidth <= 900 ? 640 : 760;
     itemsData.forEach(item => {
       let img = new Image();
-      img.crossOrigin = 'anonymous';
-      img.onload = () => {
-        try {
-          let canvas = document.createElement('canvas');
-          let w = img.naturalWidth, h = img.naturalHeight;
-          if (w > max) { h = Math.round(h * (max / w)); w = max; }
-          canvas.width = w; canvas.height = h;
-          let ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0, w, h);
-          canvas.toBlob(blob => {
-            if (blob) item.blobUrl = URL.createObjectURL(blob);
-            finishItemLoad(item);
-          }, 'image/webp', 0.88);
-        } catch (e) { finishItemLoad(item); }
-      };
+      img.onload = () => finishItemLoad(item);
       img.onerror = () => finishItemLoad(item);
-      img.src = item.rawUrl;
+      img.src = item.url;
     });
   }
 
   function finishItemLoad(item) {
     item.loaded = true;
-    if (item.imgEl) { item.imgEl.src = item.blobUrl; item.imgEl.onload = () => item.imgEl.classList.add('in'); }
-    if (item.gridImgEl) { item.gridImgEl.src = item.blobUrl; }
+    if (item.imgEl) { item.imgEl.src = item.url; item.imgEl.onload = () => item.imgEl.classList.add('in'); }
+    if (item.gridImgEl) { item.gridImgEl.src = item.url; }
     checkAssetLoaded();
   }
 
@@ -111,7 +95,7 @@
       let fig = document.createElement('figure');
       let img = document.createElement('img');
       img.alt = item.title;
-      if (item.loaded) { img.src = item.blobUrl; img.onload = () => img.classList.add('in'); }
+      if (item.loaded) { img.src = item.url; img.onload = () => img.classList.add('in'); }
       fig.appendChild(img);
       card.appendChild(fig);
       orb.appendChild(card);
@@ -123,7 +107,7 @@
       gItem.setAttribute('data-idx', i);
       let gImg = document.createElement('img');
       gImg.alt = item.title;
-      gImg.src = item.loaded ? item.blobUrl : '';
+      gImg.src = item.loaded ? item.url : '';
       gItem.appendChild(gImg);
       let gCap = document.createElement('figcaption');
       gCap.textContent = item.title;
@@ -318,7 +302,7 @@
   function openLightbox(idx, sourceImg) {
     let item = itemsData[idx];
     focusedIdx = idx; sourceElForLit = sourceImg;
-    litImg.src = item.blobUrl;
+    litImg.src = item.url;
     litTitle.textContent = item.title;
     litWhere.textContent = item.place;
     litNote.textContent = item.note;
