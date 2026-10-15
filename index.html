@@ -2,110 +2,80 @@
 <html lang="vi">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Nghề Nhà Khoa Học Máy Tính — Lịch Sử, Đột Phá & Tiến Trình Số</title>
-  <meta name="description" content="Trang web chuyên sâu về nghề Nhà khoa học máy tính: Từ lịch sử khởi nguyên, các bước đột phá phần cứng/phần mềm, sự kiện nổi bật đến kỷ nguyên AI và lượng tử hiện đại.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bách Khoa Thư Hướng Nghiệp Ngành Khoa Học Máy Tính</title>
+  <meta name="description" content="Tài liệu wiki chuyên khảo hướng nghiệp ngành Khoa học máy tính: giúp học sinh hiểu rõ công việc, yêu cầu năng lực, đối chiếu sở thích và định hướng tương lai.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
-<body class="locked">
+<body>
 
-  <div id="splash">
-    <div class="mark">Nghề<em>KhoaHọc</em></div>
-    <div class="bar"><s id="bar"></s></div>
-    <div class="tag">Lịch Sử & Tiến Trình Khoa Học Máy Tính</div>
-  </div>
-
-  <header class="chrome">
-    <a class="wordmark" href="#" aria-label="Nghề Khoa Học Máy Tính">Khoa<em>Học</em></a>
-    <button id="menuBtn" class="menu-btn" aria-expanded="false" aria-controls="menu" aria-label="Mở menu">
-      <span class="menu-label">Menu</span>
-      <span class="bars"><i></i><i></i></span>
-    </button>
+  <!-- THANH ĐIỀU HƯỚNG WIKI -->
+  <header class="wiki-header">
+    <div class="wiki-nav-container">
+      <span class="wiki-logo">CS_WIKI // <i>Career Archive</i></span>
+      <nav class="wiki-links">
+        <a href="#sec-1">1. Nội Dung</a>
+        <a href="#sec-2">2. Tổng Quan</a>
+        <a href="#sec-3">3. Yêu Cầu</a>
+        <a href="#sec-4">4. Thực Tiễn</a>
+        <a href="#sec-5">5. Hướng Đi</a>
+        <a href="#sec-6">6. Tổng Kết</a>
+      </nav>
+    </div>
   </header>
 
-  <aside class="bio chrome">
-    <div class="who">
-      <img id="avatar" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Ada_Lovelace_portrait.jpg/640px-Ada_Lovelace_portrait.jpg" alt="Chân dung Ada Lovelace" crossorigin="anonymous">
-      <b>Tiến Trình Lịch Sử</b>
-    </div>
-    <p>Hành trình từ thuật toán đầu tiên của Ada Lovelace (1843) đến các hệ thống trí tuệ nhân tạo và điện toán lượng tử đương đại.</p>
-  </aside>
+  <!-- NỘI DUNG CHÍNH (WIKI ARTICLE) -->
+  <main class="wiki-container">
+    <article class="wiki-article">
+      
+      <!-- HEADER BÀI VIẾT -->
+      <header class="article-head">
+        <div class="wiki-category">Tài Liệu Hướng Nghiệp & Chuyên Khảo Công Nghệ</div>
+        <h1>Định Hướng Nghề Nghiệp Ngành Khoa Học Máy Tính</h1>
+        <p class="article-lead">Giải quyết bài toán bối rối lựa chọn tương lai của học sinh: Cung cấp góc nhìn toàn diện về công việc, kiến thức, kỹ năng và phương pháp đối chiếu năng lực cá nhân với các chuyên ngành công nghệ.</p>
+        <div class="article-info">
+          <span>Biên soạn: Hội Đồng Tư Vấn Hướng Nghiệp</span>
+          <span>•</span>
+          <span>Kiểm chứng dữ liệu: Chuẩn ACM & IEEE</span>
+        </div>
+      </header>
 
-  <footer class="colophon chrome">
-    Kiểm Chứng Khoa Học · ACM & IEEE
+      <!-- ẢNH ĐẠI DIỆN CHÍNH -->
+      <figure class="wiki-hero-img">
+        <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop" alt="Lập trình và Khoa học máy tính" crossorigin="anonymous">
+        <figcaption>Khoa học máy tính kết hợp nền tảng toán học, tư duy thuật toán và hệ thống thông minh.</figcaption>
+      </figure>
+
+      <!-- MỤC LỤC TRANG -->
+      <div class="toc-box">
+        <h3>Mục lục nội dung bài viết</h3>
+        <ul>
+          <li><a href="#sec-1">1. Nội dung chính và vấn đề hướng nghiệp cần giải quyết</a></li>
+          <li><a href="#sec-2">2. Tìm hiểu chung về bản chất ngành Khoa học máy tính</a></li>
+          <li><a href="#sec-3">3. Yêu cầu cần có về kiến thức, kỹ năng và tư duy</a></li>
+          <li><a href="#sec-4">4. Liên kết thực tế qua các mốc công nghệ và tư liệu hình ảnh</a></li>
+          <li><a href="#sec-5">5. Hướng đi phù hợp: Đối chiếu sở thích & năng lực cá nhân</a></li>
+          <li><a href="#sec-6">6. Tổng kết triển vọng và lời khuyên định hướng</a></li>
+        </ul>
+      </div>
+
+      <!-- CONTAINER NỘI DUNG TỰ ĐỘNG TỪ DATA.JS -->
+      <div id="wiki-sections-content">
+        <!-- Nội dung 6 phần sẽ được render tự động tại đây -->
+      </div>
+
+    </article>
+  </main>
+
+  <!-- CHÂN TRANG WIKI -->
+  <footer class="wiki-footer">
+    <p>Bách Khoa Thư Hướng Nghiệp Khoa Học Máy Tính · Xây dựng theo tiêu chuẩn tài liệu Wiki mở.</p>
   </footer>
 
-  <button id="gridBtn" class="gridbtn" aria-label="Chuyển đổi dạng lưới">
-    <b></b><b></b><b></b><b></b>
-  </button>
-
-  <div class="cue chrome">
-    <span>Kéo để xoay khối sự kiện</span>
-    <s></s>
-  </div>
-
-  <div id="scrolltrack"></div>
-  <div id="stage">
-    <div id="world">
-      <div id="orb"></div>
-      <h1 id="headline">
-        <span class="inner">
-          <span style="--i:0">Lịch</span>
-          <span style="--i:1">Sử</span>
-          <span style="--i:2">&amp;</span>
-          <span style="--i:3">Đột</span>
-          <span style="--i:4">Phá</span>
-        </span>
-      </h1>
-    </div>
-  </div>
-
-  <div class="vig"></div>
-
-  <div id="grid" tabindex="-1">
-    <div class="rows" id="gridRows"></div>
-  </div>
-
-  <div id="lit" role="dialog" aria-hidden="true">
-    <div class="scrim" data-close></div>
-    <div class="plate">
-      <div class="shot">
-        <img id="litImg" src="" alt="" crossorigin="anonymous">
-        <button data-close class="close-btn">Đóng</button>
-      </div>
-      <div class="meta">
-        <div>
-          <h2 id="litTitle"></h2>
-          <div class="where" id="litWhere"></div>
-        </div>
-        <div class="note" id="litNote"></div>
-      </div>
-    </div>
-  </div>
-
-  <div id="menu">
-    <nav>
-      <a href="#" data-grid>1. Sơ Đồ Khối 3D (21 Mốc Lịch Sử)</a>
-      <a href="#" data-close-menu>2. Khởi Nguyên & Nền Tảng Lý Thuyết (1843 - 1945)</a>
-      <a href="#" data-close-menu>3. Kỷ Nguyên Phần Cứng & Mạng Sơ Khởi (1946 - 1980)</a>
-      <a href="#" data-close-menu>4. Cuộc Cách Mạng Internet & Web Toàn Cầu</a>
-      <a href="#" data-close-menu>5. Kỷ Nguyên Trí Tuệ Nhân Tạo & Deep Learning</a>
-      <a href="#" data-close-menu>6. Tương Lai: Điện Toán Lượng Tử & AI Tạo Sinh</a>
-    </nav>
-    <div class="addr">
-      Silicon Valley · Cambridge · Tokyo · Sài Gòn<br>
-      history@computerscience.archive | Static Verified Build 2026
-    </div>
-  </div>
-
-  <div id="dot"></div>
-
   <script src="data.js"></script>
-  <script src="background.js"></script>
-  <script src="defender.js"></script>
   <script src="main.js"></script>
 </body>
 </html>
